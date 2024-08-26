@@ -13,7 +13,7 @@ author:
 date: last-modified
 presenter:
   name: Presenter Name
-  institude: Presenter Institute
+  institute: Presenter Institute
 ---
 
 ## Example slide
