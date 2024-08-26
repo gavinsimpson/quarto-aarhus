@@ -13,3 +13,5 @@ contributes:
         <div class = "au-meta-presenter">{{< meta presenter.name >}} <\br>
         {{< meta presenter.institute >}}</div>
       logo: au-logo-uk-var2-blue.png
+      template-partials:
+        - title-slide.html
