@@ -61,12 +61,13 @@ html * {
 #title-slide {
   text-align: left;
   background-color: $au-primary-color;
+  color: $au-white;
 
   .title {
     color: $au-white;
     font-size: 60pt;
     font-weight: bold;
-    font-family: $au-font-passata-light;
+    font-family: $au-font-passata;
     text-transform: uppercase;
   }
 
@@ -81,8 +82,8 @@ html * {
   .quarto-title-affiliation,
   .quarto-title-author-email {
     font-family: $au-font-passata-light;
-    // font-size: 80%;
-    // color: #7F7F7F;
+    //font-size: 80%;
+    color: $au-white;
   }
 
   .author,
@@ -101,6 +102,7 @@ html * {
       width: 100%;
     }
   }
+  
 
 }
 
