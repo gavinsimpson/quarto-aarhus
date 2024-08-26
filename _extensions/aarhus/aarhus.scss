@@ -1,27 +1,125 @@
-/* scss defaults */
+/*-- scss:defaults --*/
+
+
 
 // aarhus university colours
-$au-colour-blue: #003d73;
-$au-colour-dark-blue: #002546;
-$au-colour-purple: #655a9f;
-$au-colour-dark-purple: #281c41;
-$au-colour-cyan: #37a0cb;
-$au-colour-dark-cyan: #003e5c;
-$au-colour-turquoise: #00aba4;
-$au-colour-dark-turquoise: #004543;
-$au-colour-green: #8bad3f;
-$au-colour-dark-green: #425821;
-$au-colour-yellow: #fabb00;
-$au-colour-dark-yellow: #634b03;
-$au-colour-orange: #ee7f00;
-$au-colour-dark-orange: #5f3408;
-$au-colour-red: #e2001a;
-$au-colour-dark-red: #5b0c0c;
-$au-colour-magenta: #e2007a;
-$au-colour-dark-magenta: #5f0030;
-$au-colour-grey: #878787;
-$au-colour-dark-grey: #4b4b4b;
-$au-colour-black: #000000;
+$au-blue: #003d73;
+$au-dark-blue: #002546;
+$au-purple: #655a9f;
+$au-dark-purple: #281c41;
+$au-cyan: #37a0cb;
+$au-dark-cyan: #003e5c;
+$au-turquoise: #00aba4;
+$au-dark-turquoise: #004543;
+$au-green: #8bad3f;
+$au-dark-green: #425821;
+$au-yellow: #fabb00;
+$au-dark-yellow: #634b03;
+$au-orange: #ee7f00;
+$au-dark-orange: #5f3408;
+$au-red: #e2001a;
+$au-dark-red: #5b0c0c;
+$au-magenta: #e2007a;
+$au-dark-magenta: #5f0030;
+$au-grey: #878787;
+$au-dark-grey: #4b4b4b;
+$au-black: #000000;
+$au-white: #ffffff;
 
 // aarhus university primary colour
-$au-colour-primary: $au-colour-blue;
+$au-primary-color: $au-blue;
+
+// colors
+$body-bg: $au-white !default;
+$body-color: $au-black !default;
+$link-color: $au-cyan !default; // testing
+$selection-bg: $au-magenta !default; //testing
+
+// fonts
+$au-font-passata: "AU Passata";
+$au-font-passata-light: "AU Passata Light";
+$font-family-sans-serif: $au-font-passata, sans-serif !default;
+$font-family-monospace: Menlo, SFMono-Regular, Monaco, Consolas, Liberation Mono, Courier New, monospace !default;
+
+// headings
+$presentation-heading-font: $font-family-sans-serif !default;
+$presentation-heading-color: $au-primary-color !default;
+$presentation-heading-text-transform: uppercase !default;
+
+// code blocks
+$code-block-border-color: $au-grey !default;
+
+/*-- scss:rules --*/
+
+// default
+html * {
+  color-profile: sRGB;
+  rendering-intent: auto;
+}
+
+// title slide
+#title-slide {
+  text-align: left;
+  background-color: $au-primary;
+
+  .title {
+    color: $au-white;
+    font-size: 60pt;
+    font-weight: bold;
+    font-family: $au-font-passata-light;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    color: $au-white;
+    font-weight: normal;
+    font-family: $au-font-passata-light;
+    text-transform: uppercase;
+  }
+
+  .institute,
+  .quarto-title-affiliation,
+  .quarto-title-author-email {
+    font-family: $au-font-passata-light;
+    // font-size: 80%;
+    // color: #7F7F7F;
+  }
+
+  .author,
+  .quarto-title-author-name {
+    font-family: $au-font-passata-light;
+    color: $au-white;
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      width: 100%;
+    }
+  }
+
+}
+
+// reveal.js specific overrides
+.reveal .slide-logo {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 12px;
+  max-height: 2.2rem;
+  height: 100%;
+  width: auto;
+  z-index: 2;
+}
+
+.reveal p {
+  font-size: 20pt;
+  font-weight: normal;
+  font-family: $font-family-sans-serif;
+  color: $body-color;
+  //margin-top: 1.25em;
+}
