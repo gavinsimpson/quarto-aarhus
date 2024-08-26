@@ -1,0 +1,15 @@
+title: Aarhus University Presentation Template
+author: Gavin L. Simpson
+version: 0.0.1
+quarto-required: ">=1.5.0"
+contributes:
+  formats:
+    revealjs:
+      slide-number: c
+      highlight-style: github-dark
+      theme: [default, aarhus.scss]
+      footer: |
+        <div class = "au-meta-date">{{< meta date >}}</div>
+        <div class = "au-meta-presenter">{{< meta author.1.name >}} <\br>
+        {{< meta institute.1 >}}</div>
+      logo: au-logo-uk-var2-blue.png
