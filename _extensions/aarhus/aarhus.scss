@@ -83,7 +83,7 @@ html * {
   .quarto-title-author-email {
     font-family: $au-font-passata-light;
     //font-size: 80%;
-    color: $au-white;
+    color: $au-white !important;
   }
 
   .author,
@@ -102,7 +102,7 @@ html * {
       width: 100%;
     }
   }
-  
+
 
 }
 
@@ -116,6 +116,11 @@ html * {
   height: 100%;
   width: auto;
   z-index: 2;
+}
+
+.reveal .slide-menu-button {
+  left: 8px;
+  top: 8px;
 }
 
 .reveal p {

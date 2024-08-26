@@ -11,6 +11,9 @@ author:
     email: alias@email.com
     affiliations: Your Institution
 date: last-modified
+presenter:
+  name: Presenter Name
+  institude: Presenter Institute
 ---
 
 ## Example slide
