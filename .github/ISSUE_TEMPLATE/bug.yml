@@ -1,0 +1,19 @@
+name: Bug report
+description: Report a rendering or installation problem.
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Include expected behaviour and what you observed.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Minimal Quarto example
+      description: Remove private details. Do not attach font files.
+      render: markdown
+  - type: input
+    attributes:
+      label: Quarto version, browser and operating system
+    validations:
+      required: true

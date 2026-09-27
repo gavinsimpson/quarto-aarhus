@@ -1,87 +1,140 @@
 ---
-title: A title
-subtitle: A subtitle
-format: aarhus-revealjs
-html-math-method:
-  method: mathjax
-  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+title: "Aarhus University"
+subtitle: "Presentation subtitle"
 author:
   - name: Your Name
-    orcid: 0000-0000-0000-0000
-    email: alias@email.com
-    affiliations: Your Institution
-date: last-modified
+    affiliations: Your Department
+    email: jane-doe@dept.au.dk
+    orcid: 0000-0000-0000-0000  # Placeholder: replace with your own ORCID
+format:
+  aarhus-revealjs:
+    html-math-method: mathml
+date: today
+event: Example symposium
 presenter:
-  name: Presenter Name
-  institute: Presenter Institute
+  name: Your Name
+  title: Your Title
+  institute: Your Department
+aarhus:
+  colour: dark-blue
+  orcid-colour: brand
+  aspect-ratio: "16:9"
+  section-style: peto
+  end-slide: peto
+  # font-dir: fonts  # See README for the nine AU font filenames.
 ---
 
 ## Example slide
 
-### This is a subtitle
+Text, slide titles and the short rule share the same left margin.
 
-Here we have some text that may run over several lines of the slide frame,
-depending on how long it is.
+- First point
+- Second point
+  - Supporting detail
 
-- first item 
-    - A sub item
+::: {.notes}
+Speaker notes stay with the slide.
+:::
 
-Next, we'll briefly review some theme-specific components.
+## A longer heading that wraps naturally onto two lines
 
-- Note that _all_ of the standard Reveal.js
-[features](https://quarto.org/docs/presentations/revealjs/)
-can be used with this theme, even if they are not highlighted here.
+The rule and content move down automatically when the title wraps.
 
-## Additional theme classes
+# A new section
 
-### Some extra things you can do with the clean theme
+## Text and an image
 
-Special classes for emphasis
+:::: {.columns}
+::: {.column width="48%"}
+### First topic
 
-- `.alert` class for default emphasis, e.g. [important note]{.alert}.
-- `.fg` class for custom colour, e.g. [important note]{.fg style="--col: #e64173"}.
-- `.bg` class for custom background, e.g. [important note]{.bg style="--col: #e64173"}.
+Use ordinary Quarto columns for text beside an image, a biography, or two related ideas.
 
-Cross-references
+- Explain the image
+- Add supporting details
+:::
+::: {.column width="48%"}
+{{< placeholder 380 280 format=svg >}}
+:::
+::::
 
-- `.button` class provides a Beamer-like button, e.g.
-[[Summary]{.button}](#sec-summary)
+## Two pictures
 
-## Want more?
+:::: {layout-ncol=2}
+::: {#fig-example-1}
+{{< placeholder 380 250 format=svg >}}
 
-### See our longer demo slides
+First picture
+:::
 
-We've deliberarely kept this template lean, to get you up and running as fast as
-possible.
+::: {#fig-example-2}
+{{< placeholder 380 250 format=svg >}}
 
-We provide a separate
-[demo template](https://github.com/grantmcdermott/quarto-revealjs-clean-demo),
-with more examples for integrating code, tables, figures, etc.
+Second picture
+:::
+::::
 
-  - See the live demo slides
-  [here](https://grantmcdermott.com/quarto-revealjs-clean-demo/template.html).
+## Three pictures
 
-## Summary {#sec-summary}
+:::: {layout-ncol=3}
+::: {#fig-example-3}
+{{< placeholder 240 230 format=svg >}}
 
-### A minimalist and elegant presentation theme
+First
+:::
 
-The Quarto reveal.js clean theme aims to be a minimalist and elegant presention
-theme. Here are some options to get you started:
+::: {#fig-example-4}
+{{< placeholder 240 230 format=svg >}}
 
-Add the theme to an existing project.
+Second
+:::
 
-```{.bash}
-quarto install extension grantmcdermott/quarto-revealjs-clean
+::: {#fig-example-5}
+{{< placeholder 240 230 format=svg >}}
+
+Third
+:::
+::::
+
+## A custom figure panel
+
+<!-- Oversize the sources so each image scales to the full width of its panel cell. -->
+:::: {layout="[[1,1],[1]]"}
+{{< placeholder 800 260 format=svg >}}
+
+{{< placeholder 800 260 format=svg >}}
+
+{{< placeholder 1600 260 format=svg >}}
+::::
+
+## A quotation
+
+> A useful quotation belongs here.
+>
+> — Source
+
+## Code, mathematics and fragments
+
+```r
+mean(c(1, 2, 3))
 ```
 
-... or, create a new project using this slide deck as a lean template.
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
 
-```{.bash}
-quarto use template grantmcdermott/quarto-revealjs-clean
-```
+::: {.fragment}
+Reveal this explanation when you are ready.
+:::
 
-... or, create a new project using the demo slide deck as a full template.
+## A table
 
-```{.bash}
-quarto use template grantmcdermott/quarto-revealjs-clean-demo
-```
+| Topic | Observation |
+|:--|:--|
+| Typography | Æ, Ø, Å, æ, ø, å |
+| Emphasis | **Bold**, *italic*, ***bold italic*** |
+| Structure | Ordinary Markdown |
+
+# Another section {au-motif="seal"}
+
+## Your closing message
+
+Replace these examples with your own material. The Peto ending is enabled in YAML.

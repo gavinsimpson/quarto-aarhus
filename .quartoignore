@@ -1,0 +1,19 @@
+# Keep local notes, outputs and developer tooling out of template installs.
+.local/
+.build/
+.quarto/
+node_modules/
+fonts/
+*_files/
+tests/
+package.json
+package-lock.json
+.gitignore
+.quartoignore
+/*.html
+docs/
+tools/
+CHANGELOG.md
+CITATION.cff
+TESTING.md
+CONTRIBUTING.md

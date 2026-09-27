@@ -1,0 +1,61 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - quarto: '1.5.57'
+            browser: chromium
+          - quarto: release
+            browser: chromium
+          - quarto: release
+            browser: firefox
+          - quarto: release
+            browser: webkit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: ${{ matrix.quarto }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: python3 tests/render.py
+      - run: node tests/browser.cjs
+        env:
+          AU_BROWSER: ${{ matrix.browser }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: checks-${{ matrix.quarto }}-${{ matrix.browser }}
+          path: |
+            .build/results-*.json
+            .build/*.png
+            .build/*.pdf
+          retention-days: 7
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: quarto-dev/quarto-actions/setup@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 tests/install.py

@@ -1,17 +1,25 @@
 title: Aarhus University Presentation Template
 author: Gavin L. Simpson
-version: 0.0.1
+version: 0.1.0
 quarto-required: ">=1.5.0"
 contributes:
   formats:
     revealjs:
-      slide-number: c
-      highlight-style: github-dark
+      shortcodes: [fontawesome]
+      au-orcid-icon: "{{< fa brands orcid >}}"
       theme: [default, aarhus.scss]
-      footer: |
-        <div class = "au-meta-date">{{< meta date >}}</div>
-        <div class = "au-meta-presenter">{{< meta presenter.name >}} <\br>
-        {{< meta presenter.institute >}}</div>
-      logo: au-logo-uk-var2-blue.png
-      template-partials:
-        - title-slide.html
+      filters: [aarhus.lua]
+      template-partials: [title-slide.html]
+      slide-level: 2
+      width: 960
+      # Private unset marker; the Lua filter sets the ratio-specific height.
+      height: 0
+      center: false
+      margin: 0
+      controls: false
+      menu: false
+      progress: false
+      slide-number: false
+      transition: none
+      auto-stretch: false
+      revealjs-plugins: [plugin]

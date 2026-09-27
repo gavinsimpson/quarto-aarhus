@@ -1,0 +1,7 @@
+---
+title: Options and authoring
+---
+
+The examples below go in the YAML front matter or Markdown body as shown. `aarhus` options configure the extension; ordinary Quarto options remain available under `format: aarhus-revealjs`.
+
+{{< include _generated/reference.md >}}

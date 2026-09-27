@@ -1,0 +1,18 @@
+---
+title: Example presentation
+---
+
+[Open the live deck](demo.html){.btn .btn-primary}
+[Download its starter source](downloads/template.qmd){.btn .btn-outline-primary}
+
+The deck demonstrates wrapping headings, sections, text/image columns, two and three figures, a custom panel, quotations, code, mathematics, fragments and tables.
+
+```{=html}
+<iframe src="demo.html" title="Aarhus University example presentation" width="100%" height="520" loading="lazy" allowfullscreen></iframe>
+```
+
+## What the public example shows
+
+The example is generated from `template.qmd` on every site build. AU fonts are **not** embedded or downloaded. If you have them installed, your browser can use them; otherwise text falls back to Arial or a system sans-serif font. The Peto section and ending use the AU seal when AU Peto is unavailable.
+
+To compare exact AU typography locally, install the AU fonts or configure `aarhus.font-dir` in your own deck. Public CI checks the fallback experience; private local checks can also verify the official font metrics.

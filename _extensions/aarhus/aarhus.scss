@@ -1,132 +1,260 @@
+/*
+ * CUSTOMISING THE AU THEME
+ *
+ * For a single presentation, keep your changes in a separate custom.css file
+ * beside the .qmd file. Load it in the document's YAML front matter:
+ *
+ *   format:
+ *     aarhus-revealjs:
+ *       css: custom.css
+ *
+ * This keeps your changes separate from extension updates. Use ordinary CSS
+ * in that file; $variables below are Sass and require an .scss stylesheet.
+ *
+ * Selectors start with .reveal to avoid affecting content outside the slides.
+ * Match the specificity of the rule you override: for example, changing body
+ * text size requires a .reveal .au-content selector with font-size: 22px; that
+ * element has its own size rather than inheriting the root font size.
+ *
+ * For a style on one slide, add a class to its Markdown heading:
+ *   ## Results {.results}
+ * Then target .reveal .slides section.results .au-content in custom.css.
+ *
+ * Dimensions are logical slide pixels, on a 960px-wide canvas. Reveal scales
+ * the whole canvas to the viewport, including fonts and branding. Use these
+ * coordinates rather than viewport units (vw/vh) for slide layout changes.
+ * After changing sizes or spacing, check the rendered slides and PDF output.
+ */
+
 /*-- scss:defaults --*/
-
-
-
-// aarhus university colours
-$au-blue: #003d73;
-$au-dark-blue: #002546;
-$au-purple: #655a9f;
-$au-dark-purple: #281c41;
-$au-cyan: #37a0cb;
-$au-dark-cyan: #003e5c;
-$au-turquoise: #00aba4;
-$au-dark-turquoise: #004543;
-$au-green: #8bad3f;
-$au-dark-green: #425821;
-$au-yellow: #fabb00;
-$au-dark-yellow: #634b03;
-$au-orange: #ee7f00;
-$au-dark-orange: #5f3408;
-$au-red: #e2001a;
-$au-dark-red: #5b0c0c;
-$au-magenta: #e2007a;
-$au-dark-magenta: #5f0030;
-$au-grey: #878787;
-$au-dark-grey: #4b4b4b;
-$au-black: #000000;
-$au-white: #ffffff;
-
-// aarhus university primary colour
-$au-primary-color: $au-blue;
-
-// colors
-$body-bg: $au-white !default;
-$body-color: $au-black !default;
-$link-color: $au-cyan !default; // testing
-$selection-bg: $au-magenta !default; //testing
-
-// fonts
-$au-font-passata: "AU Passata";
-$au-font-passata-light: "AU Passata Light";
-$font-family-sans-serif: $au-font-passata, sans-serif !default;
-$font-family-monospace: Menlo, SFMono-Regular, Monaco, Consolas, Liberation Mono, Courier New, monospace !default;
-
-// headings
-$presentation-heading-font: $font-family-sans-serif !default;
-$presentation-heading-color: $au-primary-color !default;
+// Quarto reads this defaults section before compiling its Reveal theme.
+// !default means a value is assigned only if it has not already been set.
+// The rules section below contains explicit AU sizes that can override these
+// general theme defaults. Keep Quarto's section markers intact.
+$body-bg: #fff !default;
+$body-color: #000 !default;
+$font-family-sans-serif: "AU Passata", Arial, sans-serif !default;
+$font-family-monospace: Menlo, SFMono-Regular, Monaco, Consolas, monospace !default;
+$presentation-font-size-root: 20px !default;
+$presentation-heading-font: "AU Passata", Arial, sans-serif !default;
+$presentation-heading-color: #000 !default;
 $presentation-heading-text-transform: uppercase !default;
-
-// code blocks
-$code-block-border-color: $au-grey !default;
-
+$link-color: #003d73 !default;
+$code-block-border-color: #878787 !default;
 /*-- scss:rules --*/
-
-// default
-html * {
-  color-profile: sRGB;
-  rendering-intent: auto;
+/* Base behaviour. Real font faces supply bold/italic; browsers must not
+ * manufacture them. Font families fall back to Arial when AU fonts are absent.
+ * Font embedding, when requested, is handled by aarhus.lua.
+ */
+.reveal { font-synthesis: none; }
+.reveal .slides { text-align: left; }
+/* Slide canvas and shared content margins.
+ * --au-content-top: start of the body below a normal single-line heading.
+ * --au-content-left / --au-content-width: shared by heading, rule and body.
+ * --au-content-bottom: space reserved above the footer, measured from the bottom.
+ * Override these on this selector, not :root, because they are set per slide.
+ * If you change the left margin, also adjust width to keep the right edge inside
+ * the canvas. Footer positions are independent and are defined below.
+ *
+ * aarhus.lua sets --au-height (540, 600 or 720) and --au-extra (height minus 540)
+ * from aarhus.aspect-ratio. Set the aspect ratio in YAML rather than here.
+ */
+.reveal .slides section.au-slide {
+  --au-content-top: 108.11px;
+  --au-content-left: 77.65px;
+  --au-content-width: 804.96px;
+  --au-content-bottom: 75.62px;
+  box-sizing: border-box;
+  width: 960px; height: var(--au-height); padding: 0; margin: 0;
+  color: #000; background: #fff; line-height: .99;
+  overflow: visible;
+}
+/* Colour roles come from YAML through aarhus.lua:
+ * --au-colour is the selected AU colour; --au-on-colour is contrasting text.
+ * --au-link-colour supplies readable links on white slides.
+ * Use aarhus.colour for palette selection instead of editing individual rules.
+ */
+.reveal .slides section.au-coloured { background: var(--au-colour); color: var(--au-on-colour); }
+.reveal .au-slide *, .reveal .au-slide *::before { box-sizing: border-box; }
+/* Ordinary slide heading and short rule.
+ * The plugin measures wrapped headings and sets --au-heading-extra per slide.
+ * Both the rule and body use that offset to stay below the heading. Keep this
+ * relationship when adjusting their positions; do not set the offset manually.
+ */
+.reveal .au-slide .au-heading {
+  position: absolute; left: var(--au-content-left); top: 18px; width: var(--au-content-width); min-height: 59.22px; height: auto;
+  padding: 0; margin: 0; font-size: 45px; font-weight: 700; line-height: .89;
+  color: inherit; text-transform: uppercase; display: flex; align-items: flex-end;
+}
+.reveal .au-heading strong { font-family: "AU Passata", Arial, sans-serif; font-weight: 700; }
+.reveal .au-slide > .au-rule {
+  content: ''; position: absolute; left: var(--au-content-left); top: calc(82.34px + var(--au-heading-extra, 0px)); width: 51.02px; height: 3.78px;
+  background: currentColor;
+}
+/* Content area: the plugin wraps ordinary Quarto content in .au-content.
+ * Adjust typography and Markdown spacing here. Content stays visible when it
+ * overflows, so diagnostics can report problems instead of silently clipping.
+ */
+.reveal .au-content {
+  position: absolute; top: calc(var(--au-content-top) + var(--au-heading-extra, 0px)); left: var(--au-content-left);
+  width: var(--au-content-width); bottom: var(--au-content-bottom);
+  padding: 0; margin: 0; font-size: 20px; line-height: .99;
+}
+.reveal .au-content p { margin: 6px 0 0; font-size: inherit; line-height: inherit; color: inherit; }
+.reveal .au-content > :first-child { margin-top: 0; }
+.reveal .au-content h3 { font-size: 26px; margin: 0 0 12px; color: inherit; }
+.reveal .au-content ul, .reveal .au-content ol { margin: 6px 0 0; padding-left: 34.02px; display: block; }
+.reveal .au-content li { padding-left: 0; margin-top: 6px; font-size: inherit; line-height: .99; }
+.reveal .au-content li ul, .reveal .au-content li ol { padding-left: 25.52px; }
+/* Native Quarto columns, code, images and tables. Images keep their natural
+ * proportions and are constrained to their content area. Figure panels and
+ * captions remain Quarto structures; their additional rules appear below.
+ */
+.reveal .au-content .columns { gap: 21.2px; }
+.reveal .au-content .column { min-width: 0; }
+.reveal .au-content pre { width: 100%; font-size: 16px; margin: 12px 0; box-shadow: none; }
+.reveal .au-content pre code { max-height: none; }
+.reveal .au-content img { max-width: 100%; max-height: 100%; margin: 0; }
+.reveal .au-content table { font-size: inherit; margin: 12px 0; }
+.reveal .au-content a { color: var(--au-link-colour); text-decoration: underline; }
+.reveal .au-coloured .au-content a, .reveal .au-custom-background .au-content a { color: inherit; }
+/* Footer branding lives inside the scaled slide, not the browser viewport.
+ * The plugin inserts the logo/institution, event/date, presenter and seal.
+ * These are absolute coordinates; changing one block may require moving its
+ * neighbours. The "Footer text-box insets" rules below refine this geometry
+ * and take precedence where the same property is declared twice.
+ */
+.reveal .au-footer {
+  position: absolute; left: 0; bottom: 23.7px; height: 44.05px; width: 960px;
+  color: inherit; text-transform: uppercase; font-family: "AU Passata", Arial, sans-serif;
+  font-size: 7px; line-height: 1.1;
+}
+.reveal .au-footer img { margin: 0; border: 0; box-shadow: none; max-width: none; max-height: none; }
+.reveal .au-brand { position: absolute; left: 23.82px; top: 0; width: 240px; height: 44px; }
+.reveal .au-mark { position: absolute; left: 0; top: 0; width: 43.91px; height: 43.94px; }
+.reveal .au-brand-names { position: absolute; left: 52.75px; bottom: 0; width: 185.09px; max-height: 44px; }
+.reveal .au-institute { font-size: 10px; line-height: 1; margin-bottom: 3px; }
+.reveal .au-university { font-family: "AU Passata Light", Arial, sans-serif; font-weight: 300; font-size: 6px; letter-spacing: .4px; }
+.reveal .au-event { position: absolute; left: 290.74px; bottom: 0; width: 178.94px; max-height: 44px; text-align: right; }
+.reveal .au-presenter { position: absolute; left: 491.47px; bottom: 0; width: 234.9px; max-height: 44px; }
+.reveal .au-separator { position: absolute; left: 480.3px; bottom: 0; width: .6px; height: 18px; background: currentColor; }
+.reveal .au-seal { position: absolute; left: 890.59px; top: .11px; width: 43.94px; height: 43.94px; }
+.reveal .au-page-number { position: absolute; right: 10.15px; bottom: 11.1px; font-size: 7px; line-height: 10.66px; }
+/* Accessibility helper: hide a heading visually while preserving its
+ * accessible text. Do not replace this with display:none.
+ */
+.reveal .au-visually-hidden { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+/* Ordinary Markdown blockquotes. The plugin adds the decorative quotation
+ * mark; subsequent paragraphs are styled as attribution. Final width/margins
+ * are set with the content refinements below.
+ */
+.reveal .au-content blockquote { font-family:Georgia,serif; font-weight:400; color:inherit; font-size:28px; line-height:1.07; font-style:normal; text-align:center; width:100%; margin:0; padding:0; border:0; box-shadow:none; background:none; position:relative; }
+.reveal .au-content .au-quote-mark { position:absolute; width:40.49px; height:70px; max-height:none; left:-40px; top:-14px; margin:0; }
+.reveal .au-content blockquote p + p { font-size:20px; text-transform:uppercase; }
+/* Title and section dividers.
+ * data-au-layout is internal markup generated by the extension. Authors use
+ * YAML for the title and a level-one Markdown heading (#) for section slides.
+ * Adding half of --au-extra keeps these compositions centred on taller canvases.
+ */
+.reveal [data-au-layout="title"] .au-heading,
+.reveal [data-au-layout="section"] .au-heading {
+  top:calc(195.46px + var(--au-extra) / 2); height:130.87px;
+  font-family:"AU Passata Light",Arial,sans-serif; font-weight:300; font-size:60px; line-height:.9; align-items:center;
+}
+.reveal [data-au-layout="title"] .au-content,
+.reveal [data-au-layout="section"] .au-content { top:calc(338px + var(--au-extra) / 2); font-family:"AU Passata Light",Arial,sans-serif; font-weight:300; }
+.reveal [data-au-layout="title"] > .au-rule,
+.reveal [data-au-layout="section"] > .au-rule,
+.reveal [data-au-layout^="end-"] > .au-rule { display:none; }
+/* Decorative section motifs and automatically generated ending slides.
+ * Select them with aarhus.section-style, au-motif, and aarhus.end-slide.
+ * Peto uses its own symbol font; changing the glyph text changes the artwork.
+ */
+.reveal .au-section-peto { position:absolute; left:77.65px; right:77.39px; top:40px; height:145px; font:70px/1 "AU Peto"; word-break:break-all; opacity:.28; overflow:hidden; }
+.reveal .au-section-seal { position:absolute; right:40px; top:40px; width:155px; height:155px; margin:0; opacity:.3; }
+.reveal .au-peto-ending { position:absolute; inset:0; font:100px/1 "AU Peto"; }
+.reveal .au-peto-ending span { position:absolute; display:block; white-space:nowrap; }
+.reveal .au-peto-aarhus { left:85.92px; top:calc(165.25px + var(--au-extra) / 2); }
+.reveal .au-peto-uni { left:585.94px; top:calc(164.85px + var(--au-extra) / 2); }
+.reveal .au-peto-versiet { left:148.19px; top:calc(269.96px + var(--au-extra) / 2); }
+.reveal .au-peto-caption { position:absolute; left:77.65px; bottom:40px; font:300 12px "AU Passata Light",Arial,sans-serif; text-transform:uppercase; }
+.reveal .au-end-logo { position:absolute; left:380.32px; top:calc(170.34px + var(--au-extra) / 2); width:199.36px; height:199.31px; margin:0; }
+.reveal .au-end-wordmark { position:absolute; left:261.35px; top:calc(137.62px + var(--au-extra) / 2); width:630px; height:199px; display:flex; align-items:flex-end; gap:37px; }
+.reveal .au-end-wordmark img { width:175.51px; height:175.51px; flex:none; margin:0; }
+.reveal .au-end-wordmark div { font-size:40px; text-transform:uppercase; line-height:1; max-height:175px; }
+.reveal .au-slide[data-au-layout^="end-"] .au-content { display:none; }
+.reveal .slide-menu-button { top:8px; left:8px; bottom:auto; opacity:.25; }
+.reveal .slide-menu-button:hover { opacity:1; }
+/* PDF/print output: retain background colours and hide navigation controls. */
+@media print {
+  .reveal .slides section.au-slide { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+  .reveal .slide-menu-button { display:none!important; }
 }
 
-// title slide
-#title-slide {
-  text-align: left;
-  background-color: $au-primary-color;
-  color: $au-white;
+/* Alignment and sizing refinements. These later declarations intentionally
+ * override earlier rules and Reveal defaults; account for them when editing.
+ */
+.reveal #title-slide { text-align:left; }
+.reveal .au-footer { text-align:left; }
+.reveal .au-heading br { display:block; }
 
-  .title {
-    color: $au-white;
-    font-size: 60pt;
-    font-weight: bold;
-    font-family: $au-font-passata;
-    text-transform: uppercase;
-  }
-
-  .subtitle {
-    color: $au-white;
-    font-weight: normal;
-    font-family: $au-font-passata-light;
-    text-transform: uppercase;
-  }
-
-  .institute,
-  .quarto-title-affiliation,
-  .quarto-title-author-email {
-    font-family: $au-font-passata-light;
-    //font-size: 80%;
-    color: $au-white !important;
-  }
-
-  .author,
-  .quarto-title-author-name {
-    font-family: $au-font-passata-light;
-    color: $au-white;
-  }
-
-  .quarto-title-authors {
-    display: flex;
-    justify-content: left;
-
-    .quarto-title-author {
-      padding-left: 0em;
-      padding-right: 0em;
-      width: 100%;
-    }
-  }
+.reveal .au-heading-text { display:block; width:100%; }
+.reveal .au-end-wordmark { height:175.51px; padding-bottom:4px; }
+.reveal .au-end-wordmark div { min-width:0; flex:1; }
 
 
+
+/* Footer text-box insets. These are the final footer dimensions and offsets,
+ * including the PowerPoint master text-box padding. Optional date and presenter
+ * title fields occupy the second line; names occupy the first line.
+ */
+.reveal .au-footer { height:53.28px; bottom:14.47px; line-height:.95; }
+.reveal .au-brand-names { top:24.38px; bottom:auto; height:28.9px; max-height:28.9px; }
+.reveal .au-institute { max-height:18.54px; margin:0; line-height:.9; }
+.reveal .au-university { position:absolute; top:21.54px; }
+.reveal .au-event, .reveal .au-presenter { top:26.93px; bottom:auto; height:18.9px; max-height:18.9px; }
+.reveal .au-footer-field { position:absolute; width:100%; height:10.49px; }
+.reveal .au-date, .reveal .au-presenter-title { top:10.49px; height:8.41px; }
+.reveal .au-separator { top:26px; bottom:auto; }
+.reveal [data-au-layout="title"] .au-heading { font-weight:700; }
+
+/* Native figure panels and captions. Change caption typography here without
+ * moving images out of their Quarto figure structure. Slides without a heading
+ * have no short rule and start content closer to the top.
+ */
+.reveal .au-content .quarto-layout-panel { margin:0; }
+.reveal .au-content figure { margin:0; }
+.reveal .au-content figcaption { font-size:14px; line-height:1.2; }
+.reveal .au-no-heading > .au-rule { display:none; }
+.reveal .au-no-heading { --au-content-top:25px!important; }
+.reveal .au-content blockquote { width:85%; margin:30px auto; }
+
+/* Title authors use Quarto's author metadata; presenter fields are footer-only.
+ * Titles with authors move upward to make room. Author blocks wrap with flexbox;
+ * the 280px basis and gap control how many fit in each row. Text sizes for names,
+ * emails and affiliations can be changed independently below.
+ */
+.reveal [data-au-layout="title"].au-title-with-authors .au-heading {
+  top:calc(110px + var(--au-extra) / 2);
 }
-
-// reveal.js specific overrides
-.reveal .slide-logo {
-  display: block;
-  position: fixed;
-  bottom: 0;
-  left: 12px;
-  max-height: 2.2rem;
-  height: 100%;
-  width: auto;
-  z-index: 2;
+.reveal [data-au-layout="title"].au-title-with-authors .au-content {
+  top:calc(255px + var(--au-extra) / 2);
 }
-
-.reveal .slide-menu-button {
-  left: 8px;
-  top: 8px;
+.reveal .au-content .quarto-title-authors {
+  display:flex; flex-wrap:wrap; gap:20px 32px; margin-top:22px;
+  font-family:"AU Passata",Arial,sans-serif; font-weight:400; line-height:1.15;
 }
-
-.reveal p {
-  font-size: 20pt;
-  font-weight: normal;
-  font-family: $font-family-sans-serif;
-  color: $body-color;
-  //margin-top: 1.25em;
+.reveal .quarto-title-author { flex:1 1 280px; min-width:0; }
+.reveal .quarto-title-author-name { font-size:22px; }
+.reveal .au-content .quarto-title-author-email,
+.reveal .au-content .quarto-title-affiliation { font-size:16px; margin-top:6px; }
+/* ORCID links and Font Awesome icons. The icon colour comes from
+ * aarhus.orcid-colour (brand or theme); the identifier uses the link text colour.
+ */
+.reveal .au-content .quarto-title-author-orcid {
+  display:flex; align-items:center; gap:6px; width:fit-content;
+  margin-top:6px; font-size:14px; text-decoration:none;
+}
+.reveal .au-content .quarto-title-author-orcid .au-orcid-icon {
+  width:16px; height:16px; font-size:16px; line-height:1; color:var(--au-orcid-colour); flex:none; margin:0;
 }

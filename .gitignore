@@ -1,2 +1,28 @@
+# Local implementation notes, measurements, and reference tools
+/.local/
+
+# Generated decks and validation output
+/.build/
+.quarto/
+_site/
+*_files/
+*.html
+!_extensions/aarhus/title-slide.html
+
+# User-supplied fonts and development dependencies
+fonts/
+node_modules/
+__pycache__/
+*.pyc
 .DS_Store
 
+/.luarc.json
+
+# Generated documentation site and staging copies
+/docs/_extensions/
+/docs/_generated/
+/docs/_site/
+/docs/demo.qmd
+/docs/downloads/
+/docs/site_libs/
+/docs/.quarto/

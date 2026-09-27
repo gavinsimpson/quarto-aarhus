@@ -1,0 +1,26 @@
+---
+title: "AU presentations, written in Quarto"
+toc: false
+---
+
+Create Reveal.js slides with Aarhus University colours, measured margins, title-slide authors and presentation footers. Write content with ordinary Markdown, Quarto columns and figure panels.
+
+[Get started](getting-started.qmd){.btn .btn-primary}
+[Open the example deck](demo.html){.btn .btn-outline-primary}
+
+## One theme, three aspect ratios
+
+Choose **16:9**, **16:10** or **4:3**, and any of the 20 published AU palette colours. Headings, the short rule and content share a left margin; the footer stays attached to the slide during presentation and printing.
+
+## Familiar authoring
+
+- Standard Quarto figures, columns, captions, equations, code, fragments and notes.
+- Multiple authors, affiliations, emails and linked ORCID identifiers on the title slide.
+- Separate presenter metadata for the footer.
+- Plain, Peto or seal section slides and optional AU endings.
+
+## Fonts are optional
+
+Use installed AU fonts or supply a local font directory to embed them in your own deck. Without AU fonts, text uses a fallback and Peto decorations use the AU seal. The public example contains **no AU font files**: its typography illustrates the fallback rather than exact PowerPoint font fidelity.
+
+This is an unofficial implementation based on AU's PowerPoint design. See the [option reference](reference.qmd) and [licence notices](https://github.com/gavinsimpson/quarto-aarhus/blob/main/_extensions/aarhus/assets/NOTICE.md).

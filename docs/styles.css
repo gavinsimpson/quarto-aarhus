@@ -1,0 +1,7 @@
+:root { --au-blue: #002546; }
+a { color: #003d73; }
+.btn-primary { background: var(--au-blue); border-color: var(--au-blue); }
+.btn-outline-primary { color: var(--au-blue); border-color: var(--au-blue); }
+.btn { margin: 0 .5rem .5rem 0; }
+iframe { border: 1px solid #d9dfe4; border-radius: .25rem; }
+pre { border-left: 3px solid #003d73; }

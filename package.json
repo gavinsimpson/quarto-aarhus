@@ -1,0 +1,13 @@
+{
+  "name": "quarto-aarhus-validation",
+  "private": true,
+  "scripts": {
+    "test": "python3 tests/render.py && node tests/browser.cjs",
+    "test:install": "python3 tests/install.py",
+    "docs": "python3 tools/build-docs.py",
+    "test:site": "node tests/site.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

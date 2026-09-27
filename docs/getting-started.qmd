@@ -1,0 +1,74 @@
+---
+title: Get started
+---
+
+## Requirements
+
+Install [Quarto](https://quarto.org/docs/get-started/) 1.5 or newer. You do not need Node.js or Playwright to use this extension.
+
+## Create a presentation
+
+Run this in a terminal and follow the prompts to choose a directory:
+
+```sh
+quarto use template gavinsimpson/quarto-aarhus@v0.1.0
+```
+
+Open the generated `.qmd` file, replace the example metadata and content, then preview it:
+
+```sh
+quarto preview my-presentation.qmd
+```
+
+Use the filename created in your project in place of `my-presentation.qmd`.
+
+To add the format to an existing project instead:
+
+```sh
+quarto add gavinsimpson/quarto-aarhus@v0.1.0
+```
+
+## Configure your deck
+
+```yaml
+---
+title: "My presentation"
+format: aarhus-revealjs
+author:
+  - name: Jane Doe
+    affiliations: Department Name
+    email: jane-doe@dept.au.dk
+    orcid: 0000-0000-0000-0000  # Placeholder: replace with your own ORCID
+presenter:
+  name: Jane Doe
+  title: Associate Professor
+  institute: Department Name
+event: Research seminar
+aarhus:
+  colour: dark-blue
+  aspect-ratio: "16:9"
+  orcid-colour: brand
+  section-style: plain
+  end-slide: logo  # none, logo, peto, or wordmark
+---
+```
+
+Use `##` headings for slides and `#` headings for section dividers. `author` describes title-slide authors; `presenter` supplies only footer details.
+
+## Render and share
+
+```sh
+quarto render my-presentation.qmd
+```
+
+Share the generated HTML and its companion files. To produce one self-contained HTML file, use:
+
+```yaml
+format:
+  aarhus-revealjs:
+    embed-resources: true
+```
+
+For PDF, open the HTML in Chrome with `?print-pdf` appended to its URL, then print to PDF with background graphics enabled. A browser's normal print dialog without Reveal's print mode is not the same layout.
+
+See [fonts and portable output](reference.qmd#fonts-and-portable-output) before embedding AU fonts. The [starter source](downloads/template.qmd) provides examples you can copy.

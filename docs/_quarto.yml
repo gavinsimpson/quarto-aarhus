@@ -1,0 +1,52 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - getting-started.qmd
+    - reference.qmd
+    - examples.qmd
+    - development.qmd
+    - changelog.qmd
+    - demo.qmd
+  resources:
+    - downloads/template.qmd
+website:
+  title: Quarto Aarhus
+  site-url: https://gavinsimpson.github.io/quarto-aarhus
+  repo-url: https://github.com/gavinsimpson/quarto-aarhus
+  repo-subdir: docs
+  page-navigation: true
+  navbar:
+    background: '#002546'
+    foreground: white
+    left:
+      - text: Get started
+        href: getting-started.qmd
+      - text: Reference
+        href: reference.qmd
+      - text: Examples
+        href: examples.qmd
+      - changelog.qmd
+    right:
+      - icon: github
+        href: https://github.com/gavinsimpson/quarto-aarhus
+        aria-label: Source code on GitHub
+  sidebar:
+    style: docked
+    contents:
+      - text: Overview
+        href: index.qmd
+      - getting-started.qmd
+      - reference.qmd
+      - examples.qmd
+      - development.qmd
+      - changelog.qmd
+  page-footer: 'An unofficial AU template. Software: MIT. AU artwork retains its own usage conditions.'
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    code-copy: true
+    link-external-newwindow: true

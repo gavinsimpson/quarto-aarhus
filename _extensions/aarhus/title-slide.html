@@ -1,0 +1,34 @@
+<section id="$idprefix$title-slide" class="au-slide$if(by-author)$ au-title-with-authors$endif$" data-au-layout="title"
+$for(title-slide-attributes/pairs)$ $it.key$="$it.value$"$endfor$>
+  <h1 class="title">$title$</h1>
+  <div class="au-content">
+$if(subtitle)$<p class="subtitle">$subtitle$</p>$endif$
+<div class="quarto-title-authors">
+$for(by-author)$
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+$if(by-author.url)$<a href="$by-author.url$">$endif$$if(by-author.name.literal)$$by-author.name.literal$$endif$$if(by-author.url)$</a>$endif$$if(by-author.orcid)$ <a href="https://orcid.org/$by-author.orcid$" class="quarto-title-author-orcid" aria-label="ORCID profile for $by-author.name.literal$"> <span class="au-orcid-icon" aria-hidden="true">$au-orcid-icon$</span><span>$by-author.orcid$</span></a>$endif$
+</div>
+$if(by-author.email)$
+<div class="quarto-title-author-email">
+<a href="mailto:$by-author.email$">$by-author.email$</a>
+</div>
+$endif$
+$if(by-author.affiliations)$
+    $for(by-author.affiliations)$
+    <p class="quarto-title-affiliation">
+      $if(it.url)$
+      <a href="$it.url$">
+      $endif$
+      $it.name$
+      $if(it.url)$
+      </a>
+      $endif$
+    </p>
+    $endfor$
+$endif$
+</div>
+$endfor$
+</div>
+  </div>
+</section>
