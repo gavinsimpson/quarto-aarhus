@@ -136,16 +136,17 @@ Use Quarto's `author` metadata for the title slide. Each author can have a name,
 
 ```yaml
 author:
-  - name: Gavin Simpson
-    orcid: 0000-0002-9084-8413
-    email: gavin@anivet.au.dk
+  - name: Joe Bloggs
+    orcid: 0000-0000-0000-0000
+    email: joe-blogs@dept.au.dk
     affiliations: Aarhus University
-  - name: Mona Larsen
-    email: mona@anivet.au.dk
+  - name: Jane Doe
+    orcid: 0000-0000-0000-0000
+    email: jane-doe@dept.au.dk
     affiliations: Aarhus University
 presenter:
-  name: Gavin Simpson
-  institute: Department of Animal & Veterinary Sciences
+  name: Joe Bloggs
+  institute: Department Name
 ```
 
 Select the ORCID icon treatment in YAML:

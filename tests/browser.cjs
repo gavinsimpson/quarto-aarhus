@@ -73,14 +73,14 @@ const build = process.env.AU_BUILD_DIR ? path.resolve(process.env.AU_BUILD_DIR) 
       } else if (fixture.name.startsWith('authors')) {
         const title=page.locator('#title-slide .au-content');
         assert.equal(await title.locator('.quarto-title-author').count(),2);
-        assert((await title.innerText()).includes('Gavin Simpson'));
-        assert((await title.innerText()).includes('Mona Larsen'));
+        assert((await title.innerText()).includes('Joe Bloggs'));
+        assert((await title.innerText()).includes('Jane Doe'));
         assert(!(await title.innerText()).includes('Visiting Presenter'));
         assert(!(await title.innerText()).includes('Footer Department'));
         assert.equal(await title.locator('.quarto-title-affiliation').count(),3);
         assert.equal(await title.locator('.quarto-title-author-orcid').count(),1);
-        assert.equal(await title.locator('.quarto-title-author-orcid').getAttribute('href'),'https://orcid.org/0000-0002-9084-8413');
-        assert.equal(await title.locator('a[href="mailto:mona@anivet.au.dk"]').count(),1);
+        assert.equal(await title.locator('.quarto-title-author-orcid').getAttribute('href'),'https://orcid.org/0000-0000-0000-0000');
+        assert.equal(await title.locator('a[href="mailto:jane-doe@dept.au.dk"]').count(),1);
         await page.waitForFunction(()=>[...document.querySelectorAll('#title-slide img')].every(i=>i.complete && i.naturalWidth>0));
         assert.equal(await title.locator('.fa-brands.fa-orcid').count(),1);
         const iconColour=await title.locator('.fa-orcid').evaluate(el=>getComputedStyle(el).color);

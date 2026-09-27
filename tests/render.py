@@ -69,12 +69,12 @@ format:
   aarhus-revealjs:
     embed-resources: true
 author:
-  - name: Gavin Simpson
-    orcid: 0000-0002-9084-8413
-    email: gavin@anivet.au.dk
+  - name: Joe Bloggs
+    orcid: 0000-0000-0000-0000
+    email: joe-blogs@dept.au.dk
     affiliations: Aarhus University
-  - name: Mona Larsen
-    email: mona@anivet.au.dk
+  - name: Jane Doe
+    email: jane-doe@dept.au.dk
     affiliations:
       - ref: au
       - name: Second Institute
