@@ -1,3 +1,12 @@
+## 0.1.9 — Unreleased
+
+Development version preparing for the 0.2.0 release and Quarto extension listing.
+
+- Use placeholder author identities in documentation and test fixtures.
+- Preserve literal, copyable shortcodes in the website's authoring examples.
+- Update Playwright and GitHub Actions dependencies.
+- Save CI test artifacts from the hidden build directory and fail if outputs are missing.
+
 ## 0.1.0 — 2026-09-27
 
 First public release of the AU Reveal.js format.

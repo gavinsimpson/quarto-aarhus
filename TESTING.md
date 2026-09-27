@@ -62,4 +62,27 @@ The build script stages the extension before Quarto reads the project, generates
 
 The `Pages` workflow uses GitHub Actions deployment. Enable Pages with **Source: GitHub Actions** in the repository settings. The website is built from `docs/` and deployed at `https://gavinsimpson.github.io/quarto-aarhus/`.
 
-For a release, wait for CI to pass, tag the tested commit `v0.1.0`, push the tag, and create the GitHub release using CHANGELOG.md. Do not tag a commit before its release checks pass.
+The current development version is 0.1.9. When ready for the next public release:
+
+1. Set the extension and citation versions to 0.2.0, add the actual release date to `CITATION.cff`, and finalise the changelog entry.
+2. Update the tagged installation commands in `docs/getting-started.qmd` to `@v0.2.0` and remove its development-version note.
+3. Complete the manual review and wait for CI to pass on the release commit.
+4. Tag that tested commit `v0.2.0`, push the tag, and create the GitHub release using the corresponding changelog entry. Do not tag a commit before its release checks pass.
+5. Verify installation from the published tag, then submit the Quarto listing PR below.
+
+## Quarto extension listing
+
+Follow the upstream [listing instructions](https://github.com/quarto-dev/quarto-web/tree/main/docs/extensions/listings). They require a GitHub repository, a README with installation and usage examples, and an explicit open-source licence. This repository provides those; the MIT software licence and separate AU artwork notices are documented in the README.
+
+After 0.2.0 is released, use the `gavinsimpson/quarto-web` fork to create a branch from current upstream `main`. Add this entry in alphabetical order to `docs/extensions/listings/revealjs-formats.yml`:
+
+```yaml
+- name: aarhus-revealjs
+  path: https://github.com/gavinsimpson/quarto-aarhus
+  author: '[Gavin L. Simpson](https://github.com/gavinsimpson)'
+  description: >
+    An unofficial Aarhus University Reveal.js format based on the university's
+    PowerPoint template, with AU colours, author metadata and presenter footers.
+```
+
+Open a PR against `quarto-dev/quarto-web:main`, titled `Add aarhus-revealjs to extension listings`. Link the 0.2.0 release, documentation and live example in the PR description. Submit only the listing addition; do not file the PR during 0.1.9 development.
