@@ -27,7 +27,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: python3 tools/build-docs.py
       - run: mkdir -p .build && node tests/site.cjs
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: docs/_site
   deploy:
