@@ -9,7 +9,11 @@ if ext.exists():shutil.rmtree(ext)
 shutil.copytree(root/'_extensions',ext)
 generated=docs/'_generated';generated.mkdir(exist_ok=True)
 readme=(root/'README.md').read_text()
-(generated/'reference.md').write_text(readme[readme.index('## Theme options'):readme.index('## Development and validation')])
+reference=readme[readme.index('## Theme options'):readme.index('## Development and validation')]
+# README shortcodes are literal examples. Escape them for Quarto so the website
+# displays copyable source instead of executing placeholders or icon shortcodes.
+reference=reference.replace('{{<', '{{{<').replace('>}}', '>}}}')
+(generated/'reference.md').write_text(reference)
 (generated/'testing.md').write_text((root/'TESTING.md').read_text().split('\n',1)[1])
 starter=(root/'template.qmd').read_text()
 # Do not use AU_FONT_DIR in this build, even when set in a developer's shell.

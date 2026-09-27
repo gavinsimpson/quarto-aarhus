@@ -21,6 +21,12 @@ const server=http.createServer((req,res)=>{
   for(const name of ['index','getting-started','reference','examples','development','changelog']) {
     await page.goto(`${origin}/${name}.html`);await page.waitForLoadState('networkidle');
     assert(await page.locator('main h1').count());
+    if(name==='reference') {
+      const example=await page.locator('pre').filter({hasText:'## Two pictures'}).innerText();
+      assert.equal(example.split('{{< placeholder 380 250 format=svg >}}').length-1,2);
+      assert(!example.includes('data:image/'), 'Authoring example must show shortcodes, not generated image data');
+      assert((await page.locator('main').innerText()).includes('{{< fa brands orcid >}}'));
+    }
     for(const href of await page.locator('a[href]').evaluateAll(links=>links.map(a=>a.href))) {
       const url=new URL(href);if(url.origin!==origin)continue;
       const file=path.join(root,decodeURIComponent(url.pathname.endsWith('/')?url.pathname+'index.html':url.pathname));
