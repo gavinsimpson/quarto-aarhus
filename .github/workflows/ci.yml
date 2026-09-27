@@ -44,6 +44,9 @@ jobs:
         if: always()
         with:
           name: checks-${{ matrix.quarto }}-${{ matrix.browser }}
+          # Test outputs live in .build; upload only the explicit file patterns below.
+          include-hidden-files: true
+          if-no-files-found: error
           path: |
             .build/results-*.json
             .build/*.png
