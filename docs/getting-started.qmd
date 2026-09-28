@@ -6,14 +6,14 @@ title: Get started
 
 Install [Quarto](https://quarto.org/docs/get-started/) 1.5 or newer. You do not need Node.js or Playwright to use this extension.
 
-The commands below install the published 0.1.0 release. The `main` branch is currently development version 0.1.9, preparing for 0.2.0. To try the development version, replace `@v0.1.0` with `@main`.
+The commands below install version 0.2.0.
 
 ## Create a presentation
 
 Run this in a terminal and follow the prompts to choose a directory:
 
 ```sh
-quarto use template gavinsimpson/quarto-aarhus@v0.1.0
+quarto use template gavinsimpson/quarto-aarhus@v0.2.0
 ```
 
 Open the generated `.qmd` file, replace the example metadata and content, then preview it:
@@ -27,7 +27,7 @@ Use the filename created in your project in place of `my-presentation.qmd`.
 To add the format to an existing project instead:
 
 ```sh
-quarto add gavinsimpson/quarto-aarhus@v0.1.0
+quarto add gavinsimpson/quarto-aarhus@v0.2.0
 ```
 
 ## Configure your deck

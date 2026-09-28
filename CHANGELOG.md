@@ -1,6 +1,6 @@
-## 0.1.9 — Unreleased
+## 0.2.0 — 2026-09-28
 
-Development version preparing for the 0.2.0 release and Quarto extension listing.
+Bundled AU web fonts, clearer project status, and documentation and validation improvements.
 
 - Bundle all nine AU fonts as WOFF2 and embed them automatically; retain TTF/WOFF2 directory overrides.
 - Clarify independent ownership and unofficial status, and record permission to redistribute AU fonts.

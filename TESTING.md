@@ -64,13 +64,13 @@ The build script stages the extension before Quarto reads the project, generates
 
 The `Pages` workflow uses GitHub Actions deployment. Enable Pages with **Source: GitHub Actions** in the repository settings. The website is built from `docs/` and deployed at `https://gavinsimpson.github.io/quarto-aarhus/`.
 
-The current development version is 0.1.9. When ready for the next public release:
+The release metadata and installation examples target 0.2.0. To publish this release:
 
-1. Set the extension and citation versions to 0.2.0, add the actual release date to `CITATION.cff`, and finalise the changelog entry.
-2. Update the tagged installation commands in `docs/getting-started.qmd` to `@v0.2.0` and remove its development-version note.
-3. Complete the manual review and wait for CI to pass on the release commit.
-4. Tag that tested commit `v0.2.0`, push the tag, and create the GitHub release using the corresponding changelog entry. Do not tag a commit before its release checks pass.
-5. Verify installation from the published tag, then submit the Quarto listing PR below.
+1. Confirm that the extension and citation versions are `0.2.0`, both the citation and changelog contain the actual release date, and README and getting-started installation commands use `@v0.2.0`. If publication is delayed, update the date before merging.
+2. Complete the manual review, merge the release-preparation changes, and wait for CI and Pages to pass on that exact `main` commit. Pages rebuilds and deploys the documentation and example deck; do not commit generated site files.
+3. Create an annotated `v0.2.0` tag on the tested commit and push the tag. Publish a GitHub Release titled "Quarto Aarhus 0.2.0", using the 0.2.0 changelog entry as release notes, and mark it as the latest release. The current workflows do not create tags or GitHub Releases.
+4. Verify both `quarto add gavinsimpson/quarto-aarhus@v0.2.0` and `quarto use template gavinsimpson/quarto-aarhus@v0.2.0` in fresh directories and render the resulting decks.
+5. Submit the Quarto listing PR below after the release is published and verified.
 
 ## Quarto extension listing
 
@@ -87,4 +87,4 @@ After 0.2.0 is released, use the `gavinsimpson/quarto-web` fork to create a bran
     PowerPoint template, with AU colours, author metadata and presenter footers.
 ```
 
-Open a PR against `quarto-dev/quarto-web:main`, titled `Add aarhus-revealjs to extension listings`. Link the 0.2.0 release, documentation and live example in the PR description. Submit only the listing addition; do not file the PR during 0.1.9 development.
+Open a PR against `quarto-dev/quarto-web:main`, titled `Add aarhus-revealjs to extension listings`. Link the 0.2.0 release, documentation and live example in the PR description. Submit only the listing addition after the 0.2.0 release is published and verified.

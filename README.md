@@ -15,9 +15,9 @@ An Aarhus University Reveal.js format based on the official PowerPoint template.
 ## Install and start
 
 ```sh
-quarto add gavinsimpson/quarto-aarhus
+quarto add gavinsimpson/quarto-aarhus@v0.2.0
 # Or create a new presentation with the starter document:
-quarto use template gavinsimpson/quarto-aarhus
+quarto use template gavinsimpson/quarto-aarhus@v0.2.0
 ```
 
 Use `template.qmd` as the starter and example deck. Quarto 1.5 or newer is required. This is an unofficial implementation; AU artwork retains its own usage conditions.
