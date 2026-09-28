@@ -1,0 +1,56 @@
+{
+  "AUPassata_Rg": {
+    "source_sha256": "9569db350d7d62ac7a5ca0a3023f2389d31d654ef78b9464a74e195849c17a84",
+    "woff2_sha256": "fff4edb11d1f120d4a05f1c4b45d1fffb79542c02adde0d90bb30f16bdbc7698",
+    "source_bytes": 76496,
+    "woff2_bytes": 33448
+  },
+  "AUPassata_Bold": {
+    "source_sha256": "98cb2ac3891e2cc79a02213bd64de216aa0f45652810a518e8305c36ac8ee5a3",
+    "woff2_sha256": "87d217d8a3d193e93115cc7fa9d217a9b40fd1e9a82df73aec9862ddc066cbe5",
+    "source_bytes": 68800,
+    "woff2_bytes": 30140
+  },
+  "AUPass_RgOblique": {
+    "source_sha256": "7497490036dde6db30ee018f6f2c0587cd08a5986c9df2bd764a05770d7424b4",
+    "woff2_sha256": "c31e86b6ee17e2af880aa7b6251e49b2b4d441865cbabbb846f123abf0538982",
+    "source_bytes": 53036,
+    "woff2_bytes": 21124
+  },
+  "AUPass_BoldOblique": {
+    "source_sha256": "58a6c189c3cc866dac2ff2b7a41f4dd10a70ad80376ec5b15095734f272875b3",
+    "woff2_sha256": "77ea94f1566a5b43def4b50b67c6e6cd8e813ed7dbf2ee7381c9ffb9036f193e",
+    "source_bytes": 50928,
+    "woff2_bytes": 20336
+  },
+  "AUPassata_Light": {
+    "source_sha256": "1fc2049e435984d5017944bb6e61c2f4a4617b75516faeba3d0e8f96d337acc1",
+    "woff2_sha256": "3a49766c9c2a89535071d627aa51ce4681dd1b53ec624918ea23c2290b3bd088",
+    "source_bytes": 105060,
+    "woff2_bytes": 43496
+  },
+  "AUPassLight_Bold": {
+    "source_sha256": "7812298f760372e62b7b9c3e35085a2bd4173f89e55b6d78c4df486c0ea55194",
+    "woff2_sha256": "eb194cc7600093f4af8b7c1ee316f9b0ef7fad1123b8e8a0c6f3bbf8135a66cd",
+    "source_bytes": 69344,
+    "woff2_bytes": 30180
+  },
+  "AUPassLight_BoldOblique": {
+    "source_sha256": "2eaece522e7928a6f7a23ca6f7dcb2aa3f34937db23fea177917de22e0f5efbd",
+    "woff2_sha256": "882821113d45ab3dfe093a39ad54a25e32316a4614eb826bc090817200a2d908",
+    "source_bytes": 51160,
+    "woff2_bytes": 20272
+  },
+  "AUPassLight_Oblique": {
+    "source_sha256": "d88d1fb5c0ef57432c3b86a26eaa0dc652a734982c4c18d45ec766483749c4ba",
+    "woff2_sha256": "bf6cb214cef4f0fbe6d38a7ee67ab1e3305754e7730352bbca14c716c1924324",
+    "source_bytes": 50108,
+    "woff2_bytes": 19932
+  },
+  "AU_Peto": {
+    "source_sha256": "81876a8454b61d53e22cfff3062839161d0276df7ab1c5cc838f5299466e04f2",
+    "woff2_sha256": "98fe73e8aa5dffa7433c20290ef2ef30dded9538e38d43adcec7061bd73ec069",
+    "source_bytes": 28836,
+    "woff2_bytes": 5100
+  }
+}

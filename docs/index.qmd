@@ -19,8 +19,10 @@ Choose **16:9**, **16:10** or **4:3**, and any of the 20 published AU palette co
 - Separate presenter metadata for the footer.
 - Plain, Peto or seal section slides and optional AU endings.
 
-## Fonts are optional
+## Fonts are included
 
-Use installed AU fonts or supply a local font directory to embed them in your own deck. Without AU fonts, text uses a fallback and Peto decorations use the AU seal. The public example contains **no AU font files**: its typography illustrates the fallback rather than exact PowerPoint font fidelity.
+AU Passata and AU Peto are bundled and embedded automatically. The live example uses these fonts without local installation or a font server.
 
-This is an unofficial implementation based on AU's PowerPoint design. See the [option reference](reference.qmd) and [licence notices](https://github.com/gavinsimpson/quarto-aarhus/blob/main/_extensions/aarhus/assets/NOTICE.md).
+**Unofficial project:** This extension is independently developed and maintained. It is **not an official product of Aarhus University**. Aarhus University does not own this extension and takes no responsibility for the project or its use. AU fonts, including AU Peto, are redistributed with permission; this permission does not imply university ownership or endorsement.
+
+See the [option reference](reference.qmd) and [licence notices](https://github.com/gavinsimpson/quarto-aarhus/blob/main/_extensions/aarhus/assets/NOTICE.md).

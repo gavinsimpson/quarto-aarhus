@@ -44,7 +44,7 @@ $code-block-border-color: #878787 !default;
 /*-- scss:rules --*/
 /* Base behaviour. Real font faces supply bold/italic; browsers must not
  * manufacture them. Font families fall back to Arial when AU fonts are absent.
- * Font embedding, when requested, is handled by aarhus.lua.
+ * Bundled fonts are embedded automatically by aarhus.lua.
  */
 .reveal { font-synthesis: none; }
 .reveal .slides { text-align: left; }

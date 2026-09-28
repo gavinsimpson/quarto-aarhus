@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage a font-free example and the current extension before Quarto loads it."""
+"""Stage a font-embedded example and the current extension before Quarto loads it."""
 from pathlib import Path
 import shutil, subprocess, argparse
 p=argparse.ArgumentParser();p.add_argument('--quarto',default='quarto');p.add_argument('--prepare-only',action='store_true');a=p.parse_args()
@@ -17,7 +17,7 @@ reference=reference.replace('{{<', '{{{<').replace('>}}', '>}}}')
 (generated/'testing.md').write_text((root/'TESTING.md').read_text().split('\n',1)[1])
 starter=(root/'template.qmd').read_text()
 # Do not use AU_FONT_DIR in this build, even when set in a developer's shell.
-assert not any(line.lstrip().startswith('font-dir:') for line in starter.splitlines()), 'Public starter must not embed AU fonts'
+assert not any(line.lstrip().startswith('font-dir:') for line in starter.splitlines()), 'Public starter must use bundled fonts'
 (docs/'demo.qmd').write_text(starter.replace('    html-math-method: mathml','    html-math-method: mathml\n    embed-resources: true'))
 (docs/'downloads').mkdir(exist_ok=True)
 (docs/'downloads/template.qmd').write_text(starter)

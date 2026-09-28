@@ -13,6 +13,4 @@ The deck demonstrates wrapping headings, sections, text/image columns, two and t
 
 ## What the public example shows
 
-The example is generated from `template.qmd` on every site build. AU fonts are **not** embedded or downloaded. If you have them installed, your browser can use them; otherwise text falls back to Arial or a system sans-serif font. The Peto section and ending use the AU seal when AU Peto is unavailable.
-
-To compare exact AU typography locally, install the AU fonts or configure `aarhus.font-dir` in your own deck. Public CI checks the fallback experience; private local checks can also verify the official font metrics.
+The example is generated from `template.qmd` on every site build. All nine AU font faces are embedded as WOFF2 data URLs, so the typography and Peto decorations work without installed fonts or a font server. Public CI checks font loading and the fallback for unavailable fonts.

@@ -65,15 +65,22 @@ local function meta(m)
     {'AUPassLight_Bold.ttf','AU Passata Light',700,'normal'},
     {'AUPassLight_BoldOblique.ttf','AU Passata Light',700,'italic'}, {'AUPassLight_Oblique.ttf','AU Passata Light',300,'italic'},
     {'AU_Peto.ttf','AU Peto',400,'normal'}}
-  local dir=str(opts['font-dir'])
-  if dir then
-    for _,f in ipairs(fonts) do
-      css=css..'@font-face{font-family:"'..f[2]..'";font-weight:'..f[3]..';font-style:'..f[4]..';font-display:block;src:url("'..data(dir..'/'..f[1],'font/ttf')..'") format("truetype");}'
+  -- Bundled web fonts are the default; font-dir remains a complete override.
+  local override=str(opts['font-dir'])
+  local dir=override or (root..'/assets/fonts')
+  for _,f in ipairs(fonts) do
+    local name=f[1]:gsub('%.ttf$', '.woff2')
+    local path=dir..'/'..name
+    local probe=io.open(path,'rb')
+    local mime,format='font/woff2','woff2'
+    if probe then probe:close()
+    elseif override then
+      path=dir..'/'..f[1]
+      mime,format='font/ttf','truetype'
     end
-    config.embeddedFonts=true
-  else
-    quarto.log.warning('Aarhus: set aarhus.font-dir to embed AU fonts. Without it, fidelity requires installed AU fonts.')
+    css=css..'@font-face{font-family:"'..f[2]..'";font-weight:'..f[3]..';font-style:'..f[4]..';font-display:block;src:url("'..data(path,mime)..'") format("'..format..'");}'
   end
+  config.embeddedFonts=true
   local encoded=quarto.json.encode(config):gsub('<','\\u003c')
   local includes=m['header-includes'] or pandoc.MetaList({})
   if pandoc.utils.type(includes)~='List' then includes=pandoc.MetaList({includes}) end

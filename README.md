@@ -1,5 +1,7 @@
 # Quarto Aarhus
 
+**Unofficial project:** This extension is independently developed and maintained. It is **not an official product of Aarhus University**. Aarhus University does not own this extension and takes no responsibility for the project or its use. AU fonts, including AU Peto, are redistributed with permission; this permission does not imply university ownership or endorsement.
+
 An Aarhus University Reveal.js format based on the official PowerPoint template. It provides AU typography, colour, margins, section slides, slide-local branding, and portable AU font embedding. Author content with native Quarto Markdown.
 
 [Documentation and live example](https://gavinsimpson.github.io/quarto-aarhus/) · [Changelog](CHANGELOG.md) · [Testing](TESTING.md)
@@ -36,7 +38,6 @@ aarhus:
   aspect-ratio: "16:10"
   section-style: plain
   end-slide: peto
-  # font-dir: fonts  # Optional: embed your locally supplied AU font files
 ---
 ```
 
@@ -51,7 +52,7 @@ All options below go under `aarhus:`. No SCSS editing is required.
 | `aspect-ratio` | `"16:9"` | `"16:9"`, `"16:10"`, `"4:3"` |
 | `section-style` | `plain` | `plain`, `peto`, `seal` |
 | `end-slide` | `none` | `none`, `logo`, `peto`, `wordmark`; append an ending automatically |
-| `font-dir` | absent | Directory containing the nine AU font files below |
+| `font-dir` | bundled fonts | Optional directory overriding all nine AU font faces below |
 
 Choose bright and dark colours separately, for example `blue` or `dark-blue`. Theme colour controls coloured title/section/ending backgrounds and links; ordinary slide text, rules, and branding retain the source's black/white treatments. Foregrounds on coloured slides are selected for contrast; links on white slides use the dark variant when the selected colour would be too light.
 
@@ -74,7 +75,9 @@ Logical slide dimensions are 960 × 540, 960 × 600, or 960 × 720. The taller f
 
 ## Fonts and portable output
 
-Download AU's fonts from the [AU font guidance](https://medarbejdere.au.dk/en/administration/communication/guidelines/guidelinesforfonts). Put these files in the directory named by `font-dir`:
+All eight AU Passata styles and AU Peto are bundled as WOFF2 web fonts and embedded automatically into every rendered deck. Neither authors nor viewers need locally installed AU fonts or a remote font server. The full character sets are retained.
+
+Optionally, set `aarhus.font-dir` to override the bundled fonts. Supply all nine faces using the following TTF filenames or the same names with a `.woff2` extension:
 
 ```text
 AUPassata_Rg.ttf
@@ -88,7 +91,7 @@ AUPassLight_Oblique.ttf
 AU_Peto.ttf
 ```
 
-The directory is relative to the input document; absolute paths are supported. Font files are embedded as data URLs in the generated HTML. No viewer installation or remote font server is required. A missing requested font is a render error. Without `font-dir`, rendering warns and relies on installed AU fonts, with Arial as the text fallback. When AU Peto is unavailable, Peto section motifs and endings use the AU seal instead. AU font redistribution permissions have not been established, so AU font binaries are not committed to this repository. Font Awesome icon fonts are bundled under their separate licence.
+The override directory is relative to the input document; absolute paths are supported. WOFF2 is preferred when both formats are present for a face. Font files are embedded as data URLs in the generated HTML, even without `embed-resources: true`. A missing bundled or override font is a render error. If a browser cannot load AU Peto, Peto decorations use the AU seal. Font Awesome icon fonts are bundled under their separate licence.
 
 To include other supporting resources in a single HTML file:
 
@@ -226,10 +229,10 @@ npm test
 python3 tests/install.py
 ```
 
-Public CI runs without AU fonts. To additionally check embedded AU typography locally, run `AU_FONT_DIR=/path/to/au-fonts npm test`. Do not publish those font-embedded test artifacts.
+Public CI checks the bundled AU fonts offline. To additionally check a font-directory override, run `AU_FONT_DIR=/path/to/au-fonts npm test`.
 
 See [TESTING.md](TESTING.md) for the browser matrix, PDF checks, documentation build and release process, and [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidance.
 
 ## Citation and licences
 
-Citation metadata is available in [CITATION.cff](CITATION.cff). Extension code is MIT-licensed; AU artwork and bundled dependencies retain their own [licence notices](_extensions/aarhus/assets/NOTICE.md). AU font binaries are not distributed.
+Citation metadata is available in [CITATION.cff](CITATION.cff). Extension code is MIT-licensed; AU artwork and bundled dependencies retain their own [licence notices](_extensions/aarhus/assets/NOTICE.md). AU fonts are redistributed with permission and are not covered by the MIT software licence.

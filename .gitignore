@@ -11,6 +11,7 @@ _site/
 
 # User-supplied fonts and development dependencies
 fonts/
+!/_extensions/aarhus/assets/fonts/
 node_modules/
 __pycache__/
 *.pyc

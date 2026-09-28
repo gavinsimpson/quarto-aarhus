@@ -36,10 +36,15 @@ const server=http.createServer((req,res)=>{
   }
   await page.goto(`${origin}/demo.html`);await page.waitForFunction(()=>window.Reveal?.isReady());
   assert.equal(await page.evaluate(()=>Reveal.getSlides().length),14);
-  assert.equal(await page.evaluate(()=>!!JSON.parse(document.getElementById('au-config').textContent).embeddedFonts),false);
+  assert.equal(await page.evaluate(()=>!!JSON.parse(document.getElementById('au-config').textContent).embeddedFonts),true);
+  assert.equal(await page.evaluate(async()=>{
+    const faces=[...document.fonts].filter(f=>f.family.replace(/["']/g,'').startsWith('AU'));
+    await Promise.all(faces.map(f=>f.load()));
+    return faces.filter(f=>f.status==='loaded').length;
+  }),9);
   assert.deepEqual(await page.evaluate(()=>window.auCheck()),[]);
   assert.equal(errors.length,0,errors.join('\n'));
   await page.screenshot({path:'.build/site-demo.png'});
-  console.log('Website pages, local links, live deck and absence of embedded AU fonts verified.');
+  console.log('Website pages, local links, live deck and embedded AU fonts verified.');
  } finally {await browser.close();server.close();}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

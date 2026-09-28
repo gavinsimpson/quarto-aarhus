@@ -22,6 +22,17 @@ const build = process.env.AU_BUILD_DIR ? path.resolve(process.env.AU_BUILD_DIR) 
         slides:Reveal.getSlides().map(s=>({layout:s.dataset.auLayout,footer:!!s.querySelector('.au-footer'),images:s.querySelectorAll('.au-content .quarto-layout-panel img').length})),
         issues:window.auCheck(),config:JSON.parse(document.getElementById('au-config').textContent),
         fonts:[...document.fonts].filter(f=>f.family.startsWith('AU')).map(f=>({family:f.family,status:f.status}))}));
+      if (fixture.embeddedFonts) {
+        const faces=await page.evaluate(async()=>{
+          const faces=[...document.fonts].filter(f=>f.family.replace(/["']/g,'').startsWith('AU'));
+          await Promise.all(faces.map(f=>f.load()));
+          return faces.map(f=>f.status);
+        });
+        assert.equal(faces.length,9,fixture.name+' font face count');
+        assert(faces.every(status=>status==='loaded'),fixture.name+' font loading');
+        if (await page.locator('#au-ending[data-au-layout="end-peto"]').count())
+          assert.equal(await page.locator('.au-peto-ending').count(),1);
+      }
       assert.equal(summary.width,960); assert.equal(summary.height,fixture.height);assert.equal(summary.config.colour,fixture.colour);
       assert.equal(!!summary.config.embeddedFonts,fixture.embeddedFonts);assert.equal(errors.length,0,JSON.stringify(errors));
       if (fixture.name==='overflow') {
@@ -30,12 +41,12 @@ const build = process.env.AU_BUILD_DIR ? path.resolve(process.env.AU_BUILD_DIR) 
       } else {
         assert.deepEqual(summary.issues,[],fixture.name+' diagnostics');
       }
-      if (fixture.name==='portable') {
+      if (fixture.name==='portable' || fixture.name==='font-override') {
         assert.equal(summary.config.presenter,'');assert.equal(summary.config.institute,'');
         assert.equal(summary.config.event,'');assert.equal(summary.config.foreground,'#000000');
         assert.equal(summary.slides[1].footer,true);assert.equal(summary.slides[2].footer,false);
         const html=fs.readFileSync(fixture.path,'utf8'); assert(!html.includes('url("file:'));
-        assert(!html.includes('src="deck_files/'));if(fixture.embeddedFonts) assert(html.includes('data:font/ttf;base64,'));
+        assert(!html.includes('src="deck_files/'));if(fixture.embeddedFonts) assert(/data:font\/(woff2|ttf);base64,/.test(html));
         const linkColour=await page.evaluate(()=>{
           const el=document.createElement('a');el.href='#';el.textContent='Link';document.querySelector('.au-content').append(el);
           const colour=getComputedStyle(el).color;el.remove();return colour;

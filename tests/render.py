@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Render isolated extension fixtures; AU fonts are supplied, never committed."""
-import argparse, json, os, shutil, subprocess, tempfile
+"""Render isolated extension fixtures; bundled AU fonts are embedded by default."""
+import argparse, json, os, re, shutil, subprocess, tempfile
 from pathlib import Path
 p=argparse.ArgumentParser(); p.add_argument('--font-dir',default=os.environ.get('AU_FONT_DIR')); p.add_argument('--quarto',default='quarto');p.add_argument('--build-dir',default='.build');a=p.parse_args()
 root=Path(__file__).resolve().parents[1]; build=(root/a.build_dir).resolve();build.mkdir(parents=True,exist_ok=True)
@@ -51,6 +51,11 @@ Content with a footer.
 Content without a footer.
 '''.replace('  font-dir: FONT_DIR\n',font_line)
 d=render('portable',base);manifest.append({'name':'portable','path':str(d/'deck.html'),'height':540,'colour':'#fabb00'})
+# Exercise explicit WOFF2 overrides even when AU_FONT_DIR is unset.
+override_base=base.replace(font_line, '') if font_line else base
+override_dir=str(root/'_extensions/aarhus/assets/fonts')
+d=render('font-override',override_base.replace('aarhus:\n','aarhus:\n  font-dir: '+json.dumps(override_dir)+'\n'))
+manifest.append({'name':'font-override','path':str(d/'deck.html'),'height':540,'colour':'#fabb00'})
 # Assertions exercise validation failures, not implementation details.
 for name,old,new in [('bad-colour','colour: yellow','colour: banana'),('bad-orcid-colour','colour: yellow','orcid-colour: purple'),('bad-ratio','colour: yellow','aspect-ratio: "3:4"'),('bad-width','embed-resources: true','width: 1000'),('bad-default-width','embed-resources: true','width: 1050'),('bad-height','embed-resources: true','height: 600'),('bad-layout','## Æble, økologi og ål','## Invalid {au-layout="nope"}'),('missing-font','colour: yellow','colour: yellow\n  font-dir: missing-fonts')]:
     render(name,base.replace(old,new),False)
@@ -124,18 +129,20 @@ Text on a pale background.
 Text on a transparent colour over white.
 """.replace('FONT_LINE',font_line)
 d=render('backgrounds',contrast);manifest.append({'name':'backgrounds','path':str(d/'deck.html'),'height':540,'colour':'#fabb00'})
-missing=starter.replace('  # font-dir: fonts  # See README for the nine AU font filenames.\n','')
+missing=starter
 d=render('missing-fonts',missing)
 # Rename the lookups, including the plugin's detection, so the test is reliable
 # even on a developer machine with AU fonts installed. No font data is embedded.
 html=d/'deck.html'
-html.write_text(html.read_text().replace('AU Peto','Missing Test Peto').replace('AU Passata','Missing Test Passata'))
+content=re.sub(r'@font-face\{[^}]*\}', '', html.read_text())
+content=content.replace('"embeddedFonts":true', '"embeddedFonts":false')
+html.write_text(content.replace('AU Peto','Missing Test Peto').replace('AU Passata','Missing Test Passata'))
 for css in (d/'deck_files').rglob('*.css'):
     css.write_text(css.read_text().replace('AU Peto','Missing Test Peto').replace('AU Passata','Missing Test Passata'))
 for js in (d/'deck_files').rglob('aarhus.js'):
     js.write_text(js.read_text().replace('AU Peto','Missing Test Peto').replace('AU Passata','Missing Test Passata'))
 manifest.append({'name':'missing-fonts','path':str(html),'height':540,'colour':'#002546'})
 for fixture in manifest:
-    fixture['embeddedFonts']=bool(fonts) and fixture['name']!='missing-fonts'
+    fixture['embeddedFonts']=fixture['name']!='missing-fonts'
 (build/'manifest.json').write_text(json.dumps(manifest,indent=2))
-print(f'Rendered {len(manifest)} configurations; 10 invalid inputs rejected. Embedded AU fonts: {bool(fonts)}')
+print(f'Rendered {len(manifest)} configurations; 10 invalid inputs rejected. Bundled AU fonts enabled; override: {bool(fonts)}')

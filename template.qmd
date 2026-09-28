@@ -21,7 +21,6 @@ aarhus:
   aspect-ratio: "16:9"
   section-style: peto
   end-slide: peto
-  # font-dir: fonts  # See README for the nine AU font filenames.
 ---
 
 ## Example slide

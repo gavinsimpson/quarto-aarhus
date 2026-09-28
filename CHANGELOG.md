@@ -2,6 +2,9 @@
 
 Development version preparing for the 0.2.0 release and Quarto extension listing.
 
+- Bundle all nine AU fonts as WOFF2 and embed them automatically; retain TTF/WOFF2 directory overrides.
+- Clarify independent ownership and unofficial status, and record permission to redistribute AU fonts.
+- Test bundled fonts offline and use them in the live documentation example.
 - Use placeholder author identities in documentation and test fixtures.
 - Preserve literal, copyable shortcodes in the website's authoring examples.
 - Update Playwright and GitHub Actions dependencies.
