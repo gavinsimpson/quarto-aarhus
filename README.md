@@ -1,8 +1,14 @@
 # Quarto Aarhus
 
-**Unofficial project:** This extension is independently developed and maintained. It is **not an official product of Aarhus University**. Aarhus University does not own this extension and takes no responsibility for the project or its use. AU fonts, including AU Peto, are redistributed with permission; this permission does not imply university ownership or endorsement.
+## Non-endorsement disclaimer
 
-An Aarhus University Reveal.js format based on the official PowerPoint template. It provides AU typography, colour, margins, section slides, slide-local branding, and portable AU font embedding. Author content with native Quarto Markdown.
+**Unofficial project:** This extension is independently developed and maintained. It is **not an official product of Aarhus University**. Aarhus University does not own this extension and takes no responsibility for the project or its use. AU fonts are redistributed with permission; this permission does not imply university ownership or endorsement.
+
+Aarhus University’s logo and visual identity may only be used for official organisational purposes or with its express authorisation.
+
+## Extension
+
+An Aarhus University Reveal.js format based on the official PowerPoint template. It provides AU typography, colour, margins, section slides, slide-local branding, and portable AU font embedding. Create slide decks and presentation with native Quarto Markdown that conform to the visual design language of Aarhus University.
 
 [Documentation and live example](https://gavinsimpson.github.io/quarto-aarhus/) · [Changelog](CHANGELOG.md) · [Testing](TESTING.md)
 
@@ -128,8 +134,6 @@ Use [Quarto figure panels](https://quarto.org/docs/authoring/figures.html#figure
 
 Text and branding use white for contrast.
 ```
-
-For background photographs, check readability yourself; the extension does not analyse image pixels.
 
 The AU-specific `section-style` option applies to level-one headings; `au-motif="plain"`, `"peto"`, or `"seal"` overrides an individual section. Peto spells the visible heading and is hidden from screen readers. `end-slide` selects the optional final AU branding composition. With AU Peto available, the Peto ending combines decorative glyphs with a nearby readable university name, following [AU's Peto guidance](https://medarbejdere.au.dk/en/administration/communication/guidelines/thefifthelement).
 

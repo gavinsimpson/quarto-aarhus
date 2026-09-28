@@ -6,6 +6,7 @@ The repository's MIT software licence does not relicense Aarhus University trade
 - `seal-white.svg` comes from https://cdn.au.dk/2016/assets/img/au_segl.svg. `seal-black.svg` retains the same paths in black.
 - The nine AU Passata and AU Peto fonts in `fonts/` are redistributed with permission as WOFF2 files. They retain their original font metadata and full glyph sets; the MIT software licence does not apply to them. Generated decks embed these fonts automatically. See [font provenance](fonts/README.md).
 
+Aarhus University’s logo and visual identity may only be used for official organisational purposes or with its express authorisation.
 
 - ORCID icons are supplied by the embedded `quarto-ext/fontawesome` extension (1.3.0). Its Font Awesome assets retain their bundled licence; ORCID marks retain their [brand guidelines](https://info.orcid.org/brand-guidelines/).
 
